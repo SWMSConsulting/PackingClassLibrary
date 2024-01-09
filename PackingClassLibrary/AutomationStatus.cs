@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 
 namespace PackingClassLibrary
 {
-    public enum AutomationStatusEnum
+    public enum OrderStatus
     {
         // dont change the order
         Created,
@@ -25,7 +25,7 @@ namespace PackingClassLibrary
 
         [JsonProperty("status", Required = Required.AllowNull)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public AutomationStatusEnum Status { get; set; }
+        public OrderStatus Status { get; set; }
 
 
         [JsonProperty("message")]
@@ -33,7 +33,7 @@ namespace PackingClassLibrary
 
         public AutomationStatus(
             string orderId, 
-            AutomationStatusEnum status, 
+            OrderStatus status, 
             string message = ""
         ) {
             OrderId = orderId;
