@@ -50,11 +50,10 @@ namespace PackingClassLibrary
         [JsonProperty("article_id", Required = Required.Always)]
         public string ArticleId { get; set; }
 
-        [JsonProperty("grundner_id", Required = Required.Always)]
-        public int GrundnerId { get; set; }
 
         [JsonProperty("description", Required = Required.Always)]
         public string Description { get; set; }
+
 
         [JsonProperty("width", Required = Required.Always)]
         public double Width { get; set; }
@@ -65,11 +64,14 @@ namespace PackingClassLibrary
         [JsonProperty("length", Required = Required.Always)]
         public double Length { get; set; }
 
+
         [JsonProperty("weight", Required = Required.Always)]
         public double Weight { get; set; }
 
+
         [JsonProperty("amount", Required = Required.Always)]
         public int Amount { get; set; }
+
 
         [JsonProperty("packing_strategy", Required = Required.Always)]
         public int PackingStrategy { get; set; }
