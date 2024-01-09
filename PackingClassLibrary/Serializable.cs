@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-public class Serializable
+public abstract class Serializable
 {
     public string ToJson()
     {
