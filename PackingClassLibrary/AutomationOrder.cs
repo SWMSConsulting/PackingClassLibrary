@@ -14,6 +14,10 @@ namespace PackingClassLibrary
         public OrderType OrderType { get; set; }
 
 
+        [JsonProperty("priority", Required = Required.Always)]
+        public int Priority { get; set; }
+
+
         [JsonProperty("pallets", Required = Required.Always)]
         public List<AutomationOrderPallet> Pallets { get; set; } = new List<AutomationOrderPallet>();
 
@@ -23,13 +27,12 @@ namespace PackingClassLibrary
 
         public bool IsValid()
         {
-            if(!long.TryParse(OrderId, out _))
-            {
-                Console.WriteLine("AutomationOrder :: OrderId is not numeric");
-                return false;
-            }
+            if (string.IsNullOrEmpty(OrderId)) { return false; }
+            if (!long.TryParse(OrderId, out _)) { return false; }
 
-            if(Pallets.Count() < 1)
+            if (!Enum.IsDefined(typeof(OrderType), OrderType)) { return false; }
+
+            if (Pallets.Count() < 1)
             {
                 Console.WriteLine("AutomationOrder :: Order has no pallets");
                 return false;

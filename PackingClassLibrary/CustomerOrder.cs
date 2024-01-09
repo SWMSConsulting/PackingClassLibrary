@@ -19,9 +19,14 @@ namespace PackingClassLibrary
         [JsonProperty("order_id", Required = Required.Always)]
         public string OrderId { get; set; }
 
+        
         [JsonProperty("order_type", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
         public OrderType OrderType { get; set; }
+
+
+        [JsonProperty("priority", Required = Required.Always)]
+        public int Priority { get; set; }
 
 
         [JsonProperty("article_positions", Required = Required.Always)]
@@ -30,6 +35,12 @@ namespace PackingClassLibrary
         public bool isValid()
         {
             if (string.IsNullOrEmpty(OrderId)) { return false; }
+            if (!long.TryParse(OrderId, out _)) { return false; }
+
+            if (!Enum.IsDefined(typeof(OrderType), OrderType)) { return false; }
+
+            if (Priority < 0 || Priority > 100) { return false; }
+
             if (ArticlePositions == null || ArticlePositions.Count == 0) { return false; }
 
             foreach (CustomerOrderArticlePosition article in ArticlePositions)
@@ -75,7 +86,6 @@ namespace PackingClassLibrary
 
         [JsonProperty("packing_strategy", Required = Required.Always)]
         public int PackingStrategy { get; set; }
-
 
         public bool isValid()
         {
