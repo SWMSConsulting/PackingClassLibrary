@@ -5,10 +5,16 @@ namespace PackingClassLibrary
 {
     public enum AutomationStatusEnum
     {
+        // dont change the order
+        Created,
+        Calculated, 
+        ReadyToTransfer,
+
         Transferred,
+        Error,
         NoMaterial,
         InProgress,
-        Error,
+        Finished
     }
 
     public class AutomationStatus

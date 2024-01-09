@@ -3,12 +3,6 @@ using Newtonsoft.Json.Converters;
 
 namespace PackingClassLibrary
 {
-    public enum AutomationOrderTypeEnum
-    {
-        Shipping,
-        Pickup 
-    }
-
     public class AutomationOrder
     {
         [JsonProperty("order_id", Required = Required.Always)]
@@ -17,7 +11,7 @@ namespace PackingClassLibrary
 
         [JsonProperty("order_type", Required = Required.Always)]
         [JsonConverter(typeof(StringEnumConverter))]
-        public AutomationOrderTypeEnum OrderType { get; set; }
+        public OrderType OrderType { get; set; }
 
 
         [JsonProperty("pallets", Required = Required.Always)]
