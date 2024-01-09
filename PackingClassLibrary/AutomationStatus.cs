@@ -17,7 +17,7 @@ namespace PackingClassLibrary
         Finished
     }
 
-    public class AutomationStatus
+    public class AutomationStatus : Serializable
     {
         [JsonProperty("order_id")]
         public string OrderId { get; set; }

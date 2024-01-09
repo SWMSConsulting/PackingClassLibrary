@@ -14,7 +14,7 @@ namespace PackingClassLibrary
         Manual,
     }
 
-    public class CustomerOrder
+    public class CustomerOrder : Serializable
     {
         [JsonProperty("order_id", Required = Required.Always)]
         public string OrderId { get; set; }

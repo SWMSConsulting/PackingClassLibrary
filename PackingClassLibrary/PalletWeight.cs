@@ -2,7 +2,7 @@
 
 namespace PackingClassLibrary
 {
-    public class PalletWeight
+    public class PalletWeight : Serializable
     {
         [JsonProperty("order_id", Required = Required.Always)]
         public string OrderId { get; set; }

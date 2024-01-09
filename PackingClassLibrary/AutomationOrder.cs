@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 
 namespace PackingClassLibrary
 {
-    public class AutomationOrder
+    public class AutomationOrder : Serializable
     {
         [JsonProperty("order_id", Required = Required.Always)]
         public string OrderId { get; set; }
