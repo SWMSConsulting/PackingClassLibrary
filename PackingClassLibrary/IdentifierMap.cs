@@ -1,10 +1,25 @@
 ﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace PackingClassLibrary
 {
+    public enum CrudTask
+    {
+        None,
+        Create,
+        Read,
+        Update,
+        Delete
+    }
+
     public class IdentifierMap : Serializable
     {
+        [JsonProperty("task", Required = Required.Always)]
+        public CrudTask Task { get; set; }
+        
+
         [JsonProperty("article_id", Required = Required.AllowNull)]
+        [JsonConverter(typeof(StringEnumConverter))]
         public string ArticleId { get; set; }
 
 
