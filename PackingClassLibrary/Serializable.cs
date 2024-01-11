@@ -6,6 +6,11 @@ public abstract class Serializable
         return JsonConvert.SerializeObject(this);
     }
 
+    public static string ListToJson<T>(List<T> list)
+    {
+        return JsonConvert.SerializeObject(list);
+    }
+
     public static T? FromJson<T>(string json, Action<string>? onFailure = null)
     {
         try
