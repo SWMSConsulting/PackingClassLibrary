@@ -8,7 +8,7 @@ namespace PackingClassLibrary
         Shipping,
         Pickup
     }
-    public enum ArticlePackingStategy
+    public enum ArticlePackingStrategy
     {
         Automatic,
         Manual,
@@ -85,7 +85,7 @@ namespace PackingClassLibrary
 
 
         [JsonProperty("packing_strategy", Required = Required.Always)]
-        public int PackingStrategy { get; set; }
+        public ArticlePackingStrategy PackingStrategy { get; set; } = ArticlePackingStrategy.Manual;
 
         public bool isValid()
         {
@@ -98,7 +98,7 @@ namespace PackingClassLibrary
             if (Weight < 0) { return false; }
             if (Amount <= 0) { return false; }
 
-            if (!Enum.IsDefined(typeof(ArticlePackingStategy), PackingStrategy)) { return false; }
+            if (!Enum.IsDefined(typeof(ArticlePackingStrategy), PackingStrategy)) { return false; }
 
             return true;
         }
