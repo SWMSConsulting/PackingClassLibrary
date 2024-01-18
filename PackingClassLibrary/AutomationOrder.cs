@@ -25,6 +25,11 @@ namespace PackingClassLibrary
         [JsonProperty("unpacked_articles", Required = Required.Always)]
         public List<AutomationOrderArticle> UnpackedArticles { get; set; } = new List<AutomationOrderArticle>();
 
+        public bool IsManualPackingRequired()
+        {
+            return UnpackedArticles.Count() > 0;
+        }
+
         public bool IsValid()
         {
             if (string.IsNullOrEmpty(OrderId)) { return false; }
