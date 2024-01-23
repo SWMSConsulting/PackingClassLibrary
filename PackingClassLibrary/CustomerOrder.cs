@@ -45,7 +45,10 @@ namespace PackingClassLibrary
 
             foreach (CustomerOrderArticlePosition article in ArticlePositions)
             {
-                if (!article.isValid()) { return false; }
+                if (!article.isValid()) { 
+                    Console.WriteLine("Article is not valid: " + article.ArticleId);
+                    return false; 
+                }
             }
 
             return true;
@@ -91,14 +94,18 @@ namespace PackingClassLibrary
         {
             if (string.IsNullOrEmpty(ArticleId)) { return false; }
 
-            if (Width <= 0 || Width >= MAX_WIDTH) { return false; }
-            if (Height <= 0 || Height >= MAX_HEIGHT) { return false; }
-            if (Length <= 0 || Length >= MAX_LENGTH) { return false; }
-
-            if (Weight < 0) { return false; }
-            if (Amount <= 0) { return false; }
-
             if (!Enum.IsDefined(typeof(ArticlePackingStrategy), PackingStrategy)) { return false; }
+
+            // only check dimensions if packing strategy is automatic
+            if (PackingStrategy == ArticlePackingStrategy.Automatic)
+            {
+                if (Width <= 0 || Width >= MAX_WIDTH) { return false; }
+                if (Height <= 0 || Height >= MAX_HEIGHT) { return false; }
+                if (Length <= 0 || Length >= MAX_LENGTH) { return false; }
+
+                if (Weight < 0) { return false; }
+                if (Amount <= 0) { return false; }
+            }
 
             return true;
         }
