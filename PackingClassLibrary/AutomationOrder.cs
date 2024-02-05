@@ -88,6 +88,9 @@ namespace PackingClassLibrary
         [JsonProperty("length", Required = Required.Always)]
         public int Length { get; set; }
 
+        [JsonProperty("weight", Required = Required.Always)]
+        public double Weight { get; set; }
+
 
         [JsonProperty("amount", Required = Required.Always)]
         public int Amount { get; set; }
@@ -147,6 +150,9 @@ namespace PackingClassLibrary
 
         [JsonProperty("length", Required = Required.Always)]
         public int Length { get; set; }
+
+        [JsonProperty("weight", Required = Required.Always)]
+        public double Weight { get; set; }
 
 
         [JsonProperty("center_x", Required = Required.Always)]
