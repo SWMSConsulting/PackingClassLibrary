@@ -57,7 +57,7 @@ namespace PackingClassLibrary
 
     public class CustomerOrderArticlePosition
     {
-        public const int MAX_WIDTH = 800;
+        public const int MAX_WIDTH = 1200;
         public const int MAX_HEIGHT = 2000;
         public const int MAX_LENGTH = 9999;
 
