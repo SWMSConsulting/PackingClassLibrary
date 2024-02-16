@@ -58,7 +58,7 @@ namespace PackingClassLibrary
     public class CustomerOrderArticlePosition
     {
         public const int MAX_WIDTH = 1200;
-        public const int MAX_HEIGHT = 2000;
+        public const int MAX_HEIGHT = 1000;
         public const int MAX_LENGTH = 9999;
 
         [JsonProperty("article_id", Required = Required.Always)]
