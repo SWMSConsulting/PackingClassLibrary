@@ -3,6 +3,12 @@ using Newtonsoft.Json.Converters;
 
 namespace PackingClassLibrary
 {
+    public enum PalletPackingStrategy
+    {
+        Automatic,
+        AutomaticWithManual,
+    }
+
     public class AutomationOrder : Serializable
     {
         [JsonProperty("order_id", Required = Required.Always)]
@@ -107,6 +113,9 @@ namespace PackingClassLibrary
         [JsonProperty("length", Required = Required.Always)]
         public int Length { get; set; }
 
+        [JsonProperty("packing_strategy", Required = Required.Always)]
+        public PalletPackingStrategy PackingStrategy { get; set; }
+
         [JsonProperty("packages", Required = Required.Always)]
         public List<AutomationOrderPackage> Packages { get; set; }
 
@@ -114,7 +123,7 @@ namespace PackingClassLibrary
         {
             if(PalletIndex < 0)
             {
-                Console.WriteLine("AutomationOrderPallet :: PalletIndex is negative ");
+                Console.WriteLine("AutomationOrderPallet :: PalletIndex is negative");
                 return false;
             }
             if(Packages.Count() < 1)
