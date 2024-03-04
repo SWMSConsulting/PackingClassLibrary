@@ -34,6 +34,7 @@ namespace PackingClassLibrary
 
         public bool isValid()
         {
+            // TODO: change to result
             if (string.IsNullOrEmpty(OrderId)) { return false; }
             if (!long.TryParse(OrderId, out _)) { return false; }
 
@@ -42,6 +43,9 @@ namespace PackingClassLibrary
             if (Priority < 0 || Priority > 100) { return false; }
 
             if (ArticlePositions == null || ArticlePositions.Count == 0) { return false; }
+
+            var automatedArticles = ArticlePositions.Where(a => a.PackingStrategy == ArticlePackingStrategy.Automatic);
+            if(automatedArticles.Count() == 0) { return false; }    
 
             foreach (CustomerOrderArticlePosition article in ArticlePositions)
             {
