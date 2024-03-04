@@ -100,6 +100,8 @@ namespace PackingClassLibrary
         {
             if (string.IsNullOrEmpty(ArticleId)) { return false; }
 
+            if (ArticleNumber < 1) { return false; }
+
             if (!Enum.IsDefined(typeof(ArticlePackingStrategy), PackingStrategy)) { return false; }
 
             // only check dimensions if packing strategy is automatic
