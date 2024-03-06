@@ -62,12 +62,14 @@ namespace PackingClassLibrary
     public class CustomerOrderArticlePosition
     {
         public const int MAX_WIDTH = 1200;
-        public const int MAX_HEIGHT = 2000;
+        public const int MAX_HEIGHT = 1000;
         public const int MAX_LENGTH = 9999;
 
         [JsonProperty("article_id", Required = Required.Always)]
         public string ArticleId { get; set; }
 
+        [JsonProperty("article_number", Required = Required.Always)]
+        public int ArticleNumber { get; set; }
 
         [JsonProperty("description", Required = Required.Always)]
         public string Description { get; set; }
@@ -97,6 +99,8 @@ namespace PackingClassLibrary
         public bool isValid()
         {
             if (string.IsNullOrEmpty(ArticleId)) { return false; }
+
+            if (ArticleNumber < 1) { return false; }
 
             if (!Enum.IsDefined(typeof(ArticlePackingStrategy), PackingStrategy)) { return false; }
 
