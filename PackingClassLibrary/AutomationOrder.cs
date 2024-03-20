@@ -56,17 +56,17 @@ namespace PackingClassLibrary
             return true;
         }
 
-        public Dictionary<int, int> GetRequiredStock()
+        public Dictionary<string, int> GetRequiredStock()
         {
-            var requiredStock = new Dictionary<int, int>();
+            var requiredStock = new Dictionary<string, int>();
             foreach(AutomationOrderPallet pallet in Pallets)
             {
                 foreach(AutomationOrderPackage package in pallet.Packages)
                 {
-                    if(requiredStock.ContainsKey(package.ArticleNumber))
-                        requiredStock[package.ArticleNumber] += 1;
+                    if(requiredStock.ContainsKey(package.ArticleIdentifier))
+                        requiredStock[package.ArticleIdentifier] += 1;
                     else
-                        requiredStock[package.ArticleNumber] = 1;
+                        requiredStock[package.ArticleIdentifier] = 1;
                 }
             }
             return requiredStock;
