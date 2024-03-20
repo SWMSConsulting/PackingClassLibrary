@@ -104,11 +104,11 @@ namespace PackingClassLibrary
         [JsonProperty("pallet_index", Required = Required.Always)]
         public int PalletIndex { get; set; }
 
-        [JsonProperty("pallet_id", Required = Required.Default)]
-        public string? PalletId { get; set; } = null;
+        [JsonProperty("pallet_identifier", Required = Required.Default)]
+        public string? PalletIdentifier { get; set; } = null;
 
-        [JsonProperty("protection_plate_id", Required = Required.Default)]
-        public string? ProtectionPlateId { get; set; } = null;
+        [JsonProperty("protection_plate_identifier", Required = Required.Default)]
+        public string? ProtectionPlateIdentifier { get; set; } = null;
 
         [JsonProperty("packing_strategy", Required = Required.Always)]
         public PalletPackingStrategy PackingStrategy { get; set; }
@@ -138,8 +138,8 @@ namespace PackingClassLibrary
 
     public class AutomationOrderPackage
     {
-        [JsonProperty("article_number", Required = Required.Always)]
-        public int ArticleNumber { get; set; }
+        [JsonProperty("article_identifier", Required = Required.Always)]
+        public int ArticleIdentifier { get; set; }
 
 
         [JsonProperty("index", Required = Required.Always)]
