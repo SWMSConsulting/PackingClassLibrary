@@ -75,12 +75,11 @@ namespace PackingClassLibrary
 
     public class AutomationOrderArticle
     {
-        [JsonProperty("article_number", Required = Required.Always)]
-        public int ArticleNumber { get; set; }
+        [JsonProperty("article_identifier", Required = Required.Always)]
+        public string ArticleIdentifier { get; set; }
 
         [JsonProperty("description", Required = Required.Always)]
         public string Description { get; set; }
-
 
         [JsonProperty("width", Required = Required.Always)]
         public int Width { get; set; }
@@ -141,6 +140,8 @@ namespace PackingClassLibrary
         [JsonProperty("article_identifier", Required = Required.Always)]
         public string ArticleIdentifier { get; set; }
 
+        [JsonProperty("description", Required = Required.Always)]
+        public string Description { get; set; }
 
         [JsonProperty("index", Required = Required.Always)]
         public int Index { get; set; }
@@ -170,6 +171,11 @@ namespace PackingClassLibrary
 
         public bool IsValid()
         {
+            if(CenterX < 0 || CenterY < 0 || CenterZ < 0)
+            {
+                Console.WriteLine("AutomationOrderPackage :: Center is negative");
+                return false;
+            }
             return true;
         }
     }
