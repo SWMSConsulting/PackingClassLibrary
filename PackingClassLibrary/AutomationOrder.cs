@@ -56,20 +56,17 @@ namespace PackingClassLibrary
             return true;
         }
 
-        public Dictionary<string, int> GetRequiredStock()
+        public Dictionary<int, int> GetRequiredStock()
         {
-            var requiredStock = new Dictionary<string, int>();
+            var requiredStock = new Dictionary<int, int>();
             foreach(AutomationOrderPallet pallet in Pallets)
             {
                 foreach(AutomationOrderPackage package in pallet.Packages)
                 {
-                    if(requiredStock.ContainsKey(package.ArticleId))
-                    {
-                        requiredStock[package.ArticleId] += 1;
-                    } else
-                    {
-                        requiredStock[package.ArticleId] = 1;
-                    }
+                    if(requiredStock.ContainsKey(package.ArticleNumber))
+                        requiredStock[package.ArticleNumber] += 1;
+                    else
+                        requiredStock[package.ArticleNumber] = 1;
                 }
             }
             return requiredStock;
@@ -78,9 +75,6 @@ namespace PackingClassLibrary
 
     public class AutomationOrderArticle
     {
-        [JsonProperty("article_id", Required = Required.Always)]
-        public string ArticleId { get; set; }
-
         [JsonProperty("article_number", Required = Required.Always)]
         public int ArticleNumber { get; set; }
 
@@ -144,11 +138,9 @@ namespace PackingClassLibrary
 
     public class AutomationOrderPackage
     {
-        [JsonProperty("article_id", Required = Required.Always)]
-        public string ArticleId { get; set; }
+        [JsonProperty("article_number", Required = Required.Always)]
+        public int ArticleNumber { get; set; }
 
-        [JsonProperty("description", Required = Required.Always)]
-        public string Description { get; set; }
 
         [JsonProperty("index", Required = Required.Always)]
         public int Index { get; set; }
