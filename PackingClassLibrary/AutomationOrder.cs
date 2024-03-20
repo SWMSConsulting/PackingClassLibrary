@@ -110,11 +110,11 @@ namespace PackingClassLibrary
         [JsonProperty("pallet_index", Required = Required.Always)]
         public int PalletIndex { get; set; }
 
-        [JsonProperty("width", Required = Required.Always)]
-        public int Width { get; set; }
+        [JsonProperty("pallet_id", Required = Required.Default)]
+        public string? PalletId { get; set; } = null;
 
-        [JsonProperty("length", Required = Required.Always)]
-        public int Length { get; set; }
+        [JsonProperty("protection_plate_id", Required = Required.Default)]
+        public string? ProtectionPlateId { get; set; } = null;
 
         [JsonProperty("packing_strategy", Required = Required.Always)]
         public PalletPackingStrategy PackingStrategy { get; set; }
