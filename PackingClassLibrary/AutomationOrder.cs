@@ -139,7 +139,7 @@ namespace PackingClassLibrary
     public class AutomationOrderPackage
     {
         [JsonProperty("article_identifier", Required = Required.Always)]
-        public int ArticleIdentifier { get; set; }
+        public string ArticleIdentifier { get; set; }
 
 
         [JsonProperty("index", Required = Required.Always)]
