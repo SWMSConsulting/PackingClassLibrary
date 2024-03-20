@@ -103,12 +103,6 @@ namespace PackingClassLibrary
         [JsonProperty("pallet_index", Required = Required.Always)]
         public int PalletIndex { get; set; }
 
-        [JsonProperty("pallet_identifier", Required = Required.Default)]
-        public string? PalletIdentifier { get; set; } = null;
-
-        [JsonProperty("protection_plate_identifier", Required = Required.Default)]
-        public string? ProtectionPlateIdentifier { get; set; } = null;
-
         [JsonProperty("packing_strategy", Required = Required.Always)]
         public PalletPackingStrategy PackingStrategy { get; set; }
 
