@@ -56,17 +56,17 @@ namespace PackingClassLibrary
             return true;
         }
 
-        public Dictionary<int, int> GetRequiredStock()
+        public Dictionary<string, int> GetRequiredStock()
         {
-            var requiredStock = new Dictionary<int, int>();
+            var requiredStock = new Dictionary<string, int>();
             foreach(AutomationOrderPallet pallet in Pallets)
             {
                 foreach(AutomationOrderPackage package in pallet.Packages)
                 {
-                    if(requiredStock.ContainsKey(package.ArticleNumber))
-                        requiredStock[package.ArticleNumber] += 1;
+                    if(requiredStock.ContainsKey(package.ArticleIdentifier))
+                        requiredStock[package.ArticleIdentifier] += 1;
                     else
-                        requiredStock[package.ArticleNumber] = 1;
+                        requiredStock[package.ArticleIdentifier] = 1;
                 }
             }
             return requiredStock;
@@ -75,12 +75,11 @@ namespace PackingClassLibrary
 
     public class AutomationOrderArticle
     {
-        [JsonProperty("article_number", Required = Required.Always)]
-        public int ArticleNumber { get; set; }
+        [JsonProperty("article_identifier", Required = Required.Always)]
+        public string ArticleIdentifier { get; set; }
 
         [JsonProperty("description", Required = Required.Always)]
         public string Description { get; set; }
-
 
         [JsonProperty("width", Required = Required.Always)]
         public int Width { get; set; }
@@ -104,11 +103,11 @@ namespace PackingClassLibrary
         [JsonProperty("pallet_index", Required = Required.Always)]
         public int PalletIndex { get; set; }
 
-        [JsonProperty("width", Required = Required.Always)]
-        public int Width { get; set; }
+        [JsonProperty("pallet_identifier", Required = Required.Default)]
+        public string? PalletIdentifier { get; set; } = null;
 
-        [JsonProperty("length", Required = Required.Always)]
-        public int Length { get; set; }
+        [JsonProperty("protection_plate_identifier", Required = Required.Default)]
+        public string? ProtectionPlateIdentifier { get; set; } = null;
 
         [JsonProperty("packing_strategy", Required = Required.Always)]
         public PalletPackingStrategy PackingStrategy { get; set; }
@@ -138,9 +137,11 @@ namespace PackingClassLibrary
 
     public class AutomationOrderPackage
     {
-        [JsonProperty("article_number", Required = Required.Always)]
-        public int ArticleNumber { get; set; }
+        [JsonProperty("article_identifier", Required = Required.Always)]
+        public string ArticleIdentifier { get; set; }
 
+        [JsonProperty("description", Required = Required.Always)]
+        public string Description { get; set; }
 
         [JsonProperty("index", Required = Required.Always)]
         public int Index { get; set; }
@@ -170,6 +171,11 @@ namespace PackingClassLibrary
 
         public bool IsValid()
         {
+            if(CenterX < 0 || CenterY < 0 || CenterZ < 0)
+            {
+                Console.WriteLine("AutomationOrderPackage :: Center is negative");
+                return false;
+            }
             return true;
         }
     }

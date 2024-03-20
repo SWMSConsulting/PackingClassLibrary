@@ -1,9 +1,17 @@
 ﻿using Newtonsoft.Json;
 public abstract class Serializable
 {
-    public string ToJson()
+    public string? ToJson()
     {
-        return JsonConvert.SerializeObject(this);
+        try
+        {
+            return JsonConvert.SerializeObject(this);
+        }
+        catch (JsonSerializationException ex)
+        {
+            Console.WriteLine(ex.Message);
+            return null;
+        }
     }
 
     public static string ListToJson<T>(List<T> list)
