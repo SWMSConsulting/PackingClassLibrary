@@ -68,9 +68,6 @@ namespace PackingClassLibrary
         [JsonProperty("article_id", Required = Required.Always)]
         public string ArticleId { get; set; }
 
-        [JsonProperty("article_number", Required = Required.Always)]
-        public int ArticleNumber { get; set; }
-
         [JsonProperty("description", Required = Required.Always)]
         public string Description { get; set; }
 
@@ -99,8 +96,6 @@ namespace PackingClassLibrary
         public bool isValid()
         {
             if (string.IsNullOrEmpty(ArticleId)) { return false; }
-
-            if (ArticleNumber < 1) { return false; }
 
             if (!Enum.IsDefined(typeof(ArticlePackingStrategy), PackingStrategy)) { return false; }
 
