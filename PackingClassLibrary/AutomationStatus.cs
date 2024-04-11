@@ -11,10 +11,14 @@ namespace PackingClassLibrary
         ReadyToTransfer,
 
         Transferred,
+        Blocked,
+
         Error,
         NoMaterial,
         InProgress,
-        Finished
+        Finished,
+
+
     }
 
     public class AutomationStatus : Serializable
