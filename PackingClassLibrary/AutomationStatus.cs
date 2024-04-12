@@ -6,17 +6,19 @@ namespace PackingClassLibrary
     public enum OrderStatus
     {
         // dont change the order
-        Created,
-        Calculated, 
-        ReadyToTransfer,
+        Created = 0,
+        Calculated = 1, 
 
-        Transferred,
-        Blocked,
+        ReadyToTransfer = 2,
+        Transferred = 3,
 
-        Error,
-        NoMaterial,
-        InProgress,
-        Finished,
+        Blocked = 5,
+        NoMaterial = 6,
+
+        InProgress = 8,
+   
+        Error = 10,
+        Finished = 12,
 
 
     }
