@@ -4,13 +4,13 @@ namespace PackingClassLibrary
 {
     public class ArticleInformation : Serializable
     {
-        [JsonProperty("article_number", Required = Required.Always)]
+        [JsonProperty("articleNumber", Required = Required.Always)]
         public string ArticleNumber { get; set; }
 
         [JsonProperty("description", Required = Required.Default)]
         public string? Description { get; set; }
 
-        [JsonProperty("automation_type", Required = Required.Always)]
+        [JsonProperty("automationType", Required = Required.Always)]
         public string AutomationType { get; set; }
 
         [JsonProperty("length", Required = Required.Always)]
@@ -25,7 +25,10 @@ namespace PackingClassLibrary
         [JsonProperty("weight", Required = Required.Default)]
         public double? Weight { get; set; }
 
-        [JsonProperty("minimum_stock", Required = Required.Default)]
+        [JsonProperty("minimumStock", Required = Required.Default)]
         public int? MinimumStock { get; set; }
+
+        [JsonProperty("maximumStock", Required = Required.Default)]
+        public int? MaximumStock { get; set; }
     }
 }
