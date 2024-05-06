@@ -21,5 +21,8 @@ namespace PackingClassLibrary
 
         [JsonProperty("weight", Required = Required.Default)]
         public double? Weight { get; set; }
+
+        [JsonProperty("minimum_stock", Required = Required.Default)]
+        public int? MinimumStock { get; set; }
     }
 }
