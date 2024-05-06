@@ -1,5 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using Newtonsoft.Json.Linq;
+using System.Xml.Linq;
 
 namespace PackingClassLibrary
 {
@@ -71,6 +73,23 @@ namespace PackingClassLibrary
             }
             return requiredStock;
         }
+
+        public ManualPackingOrder ToManualPackingOrder()
+        {
+            return new ManualPackingOrder()
+            {
+                OrderId = OrderId,
+                Articles = UnpackedArticles
+                    .Where(a => a.Amount > 0)
+                    .Select(a => new ManualPackingArticle()
+                    {
+                        ArticleId = a.ArticleIdentifier,
+                        Description = a.Description,
+                        Amount = a.Amount
+                    })
+                    .ToList()
+            };
+        }
     }
 
     public class AutomationOrderArticle
@@ -92,7 +111,6 @@ namespace PackingClassLibrary
 
         [JsonProperty("weight", Required = Required.Always)]
         public double Weight { get; set; }
-
 
         [JsonProperty("amount", Required = Required.Always)]
         public int Amount { get; set; }
@@ -127,6 +145,14 @@ namespace PackingClassLibrary
             }
             return true;
         }
+
+        public int Height => Packages.Max(p => p.CenterY + p.Height / 2);
+        
+        public int Width => 1200;
+        
+        public int Length => 2400;
+
+        public int Weight => 0;
     }
 
     public class AutomationOrderPackage
