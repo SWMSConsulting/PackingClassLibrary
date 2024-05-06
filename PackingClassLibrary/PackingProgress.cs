@@ -13,6 +13,9 @@ namespace PackingClassLibrary
 
         [JsonProperty("packed_articles", Required = Required.Always)]
         public List<PackingProgressArticle> PackedArticles { get; set; }
+
+        [JsonProperty("finished", Required = Required.Always)]
+        public bool Finished { get; set; }
     }
 
     public class PackingProgressArticle : Serializable
