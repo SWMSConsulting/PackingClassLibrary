@@ -9,8 +9,6 @@ namespace PackingClassLibrary
 
         [JsonProperty("articles", Required = Required.Always)]
         public List<ManualPackingArticle> Articles { get; set; }
-
-
     }
 
     public class ManualPackingArticle : Serializable
@@ -24,5 +22,7 @@ namespace PackingClassLibrary
         [JsonProperty("amount", Required = Required.Always)]
         public int Amount { get; set; }
 
+        [JsonProperty("amount_packed", Required = Required.Default)]
+        public int AmountPacked { get; set; } = 0;
     }
 }
