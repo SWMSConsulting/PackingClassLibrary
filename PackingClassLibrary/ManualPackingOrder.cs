@@ -7,8 +7,8 @@ namespace PackingClassLibrary
         [JsonProperty("order_id", Required = Required.Always)]
         public string OrderId { get; set; }
 
-        [JsonProperty("pallet_index", Required = Required.Default)]
-        public int PalletIndex { get; set; } = 0;
+        [JsonProperty("order_details", Required = Required.Default)]
+        public string OrderDetails { get; set; }
 
         [JsonProperty("articles", Required = Required.Always)]
         public List<ManualPackingArticle> Articles { get; set; }
