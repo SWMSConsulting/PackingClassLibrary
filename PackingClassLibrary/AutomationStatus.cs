@@ -40,11 +40,13 @@ namespace PackingClassLibrary
         public AutomationStatus(
             string orderId, 
             OrderStatus status, 
-            string message = ""
+            string message = "",
+            int? palletIndex = null
         ) {
             OrderId = orderId;
             Status = status;
             Message = message;
+            PalletIndex = palletIndex;
         }
     }
 }
