@@ -16,6 +16,7 @@ namespace PackingClassLibrary
         NoMaterial = 6,
 
         InProgress = 8,
+        ManualPacking = 9,
    
         Error = 10,
         Finished = 12,
@@ -28,14 +29,15 @@ namespace PackingClassLibrary
         [JsonProperty("order_id")]
         public string OrderId { get; set; }
 
-
         [JsonProperty("status", Required = Required.AllowNull)]
         [JsonConverter(typeof(StringEnumConverter))]
         public OrderStatus Status { get; set; }
 
-
         [JsonProperty("message")]
         public string Message { get; set; }
+
+        [JsonProperty("pallet_index")]
+        public int? PalletIndex { get; set; }
 
         public AutomationStatus(
             string orderId, 
