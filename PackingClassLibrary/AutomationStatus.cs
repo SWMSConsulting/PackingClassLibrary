@@ -21,6 +21,7 @@ namespace PackingClassLibrary
         Error = 10,
         Finished = 12,
 
+        PartiallyPicked = 14,
 
     }
 
