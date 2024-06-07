@@ -55,6 +55,7 @@ namespace PackingClassLibrary
         public double? Height { get; set; }
         public double? Width { get; set; }
         public double? Length { get; set; }
+        public double? Weight { get; set; } = null;
         public string? WeightReference { get; set; }
         public string? SSCC { get; set; }
         public Guid? oId { get; set; }
