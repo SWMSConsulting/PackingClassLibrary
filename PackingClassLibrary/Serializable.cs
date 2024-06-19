@@ -19,13 +19,13 @@ public abstract class Serializable
         return JsonConvert.SerializeObject(list);
     }
 
-    public static T? FromJson<T>(string? json, Action<string>? onFailure = null)
+    public static T? FromJson<T>(string? json, Action<Exception>? onFailure = null)
     {
         if (json == null)
         {
             if (onFailure != null)
             {
-                onFailure( "String to deserialize is null.");
+                onFailure( new Exception("String to deserialize is null."));
             }
             return default(T);
         }
@@ -33,11 +33,11 @@ public abstract class Serializable
         {
             return JsonConvert.DeserializeObject<T>(json);
         }
-        catch (JsonSerializationException ex)
+        catch (Exception ex)
         {
             if(onFailure != null)
             {
-                onFailure(ex.Message);
+                onFailure(ex);
             }
             return default(T);
         }
