@@ -33,6 +33,9 @@ namespace PackingClassLibrary
         [JsonProperty("unpacked_articles", Required = Required.Always)]
         public List<AutomationOrderArticle> UnpackedArticles { get; set; } = new List<AutomationOrderArticle>();
 
+        [JsonProperty("is_stock_removal_order", Required = Required.Default)]
+        public bool IsStockRemovalOrder { get; set; } = false;
+
         public bool IsManualPackingRequired()
         {
             return UnpackedArticles.Count() > 0;
