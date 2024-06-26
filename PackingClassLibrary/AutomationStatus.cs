@@ -23,6 +23,7 @@ namespace PackingClassLibrary
 
         PartiallyPicked = 14,
 
+        Archived = 16,
     }
 
     public class AutomationStatus : Serializable
