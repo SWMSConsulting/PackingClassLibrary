@@ -25,6 +25,8 @@ namespace PackingClassLibrary
         [JsonProperty("priority", Required = Required.Always)]
         public int Priority { get; set; }
 
+        [JsonProperty("ignore_stock_check", Required = Required.Default)]
+        public bool IgnoreStockCheck { get; set; } = false;
 
         [JsonProperty("pallets", Required = Required.Always)]
         public List<AutomationOrderPallet> Pallets { get; set; } = new List<AutomationOrderPallet>();
