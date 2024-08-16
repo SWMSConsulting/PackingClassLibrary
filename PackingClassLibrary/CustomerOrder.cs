@@ -61,9 +61,9 @@ namespace PackingClassLibrary
 
     public class CustomerOrderArticlePosition
     {
-        public const int MAX_WIDTH = 1200;
-        public const int MAX_HEIGHT = 1000;
-        public const int MAX_LENGTH = 9999;
+        public static int MAX_WIDTH = Convert.ToInt32(Environment.GetEnvironmentVariable("MAX_WIDTH") ?? "0");
+        public static int MAX_HEIGHT = Convert.ToInt32(Environment.GetEnvironmentVariable("MAX_HEIGHT") ?? "0");
+        public static int MAX_LENGTH = Convert.ToInt32(Environment.GetEnvironmentVariable("MAX_LENGTH") ?? "0");
 
         [JsonProperty("article_id", Required = Required.Always)]
         public string ArticleId { get; set; }
@@ -98,6 +98,10 @@ namespace PackingClassLibrary
             if (string.IsNullOrEmpty(ArticleId)) { return false; }
 
             if (!Enum.IsDefined(typeof(ArticlePackingStrategy), PackingStrategy)) { return false; }
+
+            if(MAX_HEIGHT == 0) { MAX_HEIGHT = int.MaxValue; }
+            if(MAX_WIDTH == 0) { MAX_WIDTH = int.MaxValue; }
+            if(MAX_LENGTH == 0) { MAX_LENGTH = int.MaxValue; }
 
             // only check dimensions if packing strategy is automatic
             if (PackingStrategy == ArticlePackingStrategy.Automatic)
