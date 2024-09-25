@@ -28,6 +28,8 @@ namespace PackingClassLibrary
         [JsonProperty("priority", Required = Required.Always)]
         public int Priority { get; set; }
 
+        [JsonProperty("packing_configuration", Required = Required.Default)]
+        public CustomerOrderPackingConfiguration? PackingConfiguration { get; set; } = null;
 
         [JsonProperty("article_positions", Required = Required.Always)]
         public List<CustomerOrderArticlePosition> ArticlePositions { get; set; }
@@ -112,5 +114,46 @@ namespace PackingClassLibrary
 
             return true;
         }
+    }
+    public class CustomerOrderPackingConfiguration
+    {
+        [JsonProperty("max_width", Required = Required.Always)]
+        public int MaxWidth { get; set; }
+
+        [JsonProperty("max_height", Required = Required.Always)]
+        public int MaxHeight { get; set; }
+
+        [JsonProperty("max_length", Required = Required.Always)]
+        public int MaxLength { get; set; }
+
+        [JsonProperty("max_weight", Required = Required.Default)]
+        public int? MaxWeight { get; set; } = null;
+
+
+        [JsonProperty("pallet_width", Required = Required.Default)]
+        public int? PalletWidth { get; set; } = null;
+
+        [JsonProperty("pallet_height", Required = Required.Default)]
+        public int? PalletHeight { get; set; } = null;
+
+        [JsonProperty("pallet_length", Required = Required.Default)]
+        public int? PalletLength { get; set; } = null;
+
+        [JsonProperty("pallet_weight", Required = Required.Default)]
+        public int? PalletWeight { get; set; } = null;
+
+
+        [JsonProperty("alignment_length", Required = Required.Default)]
+        public PackingAlignment AlignmentLength { get; set; } = PackingAlignment.Start;
+
+        [JsonProperty("alignment_width", Required = Required.Default)]
+        public PackingAlignment AlignmentWidth { get; set; } = PackingAlignment.Start;
+    }
+
+    public enum PackingAlignment
+    {
+        Center = 0,
+        Start = 1,
+        End = 2
     }
 }
