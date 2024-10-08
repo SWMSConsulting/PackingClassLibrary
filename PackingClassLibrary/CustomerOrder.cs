@@ -6,7 +6,7 @@ namespace PackingClassLibrary
     public enum OrderType
     {
         Shipping,
-        SeparateOutputPlace
+        PickUp
     }
     public enum ArticlePackingStrategy
     {
