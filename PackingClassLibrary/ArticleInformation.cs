@@ -32,6 +32,6 @@ namespace PackingClassLibrary
         public int? MaximumStock { get; set; }
 
         [JsonProperty("stockDetails", Required = Required.Default)]
-        public string StockDetails { get; set; } = string.Empty;
+        public string? StockDetails { get; set; }
     }
 }
