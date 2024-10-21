@@ -38,7 +38,7 @@ namespace PackingClassLibrary
         {
             // TODO: change to result
             if (string.IsNullOrEmpty(OrderId)) { return false; }
-            if (!long.TryParse(OrderId, out _)) { return false; }
+            //if (!long.TryParse(OrderId, out _)) { return false; }
 
             if (!Enum.IsDefined(typeof(OrderType), OrderType)) { return false; }
 
