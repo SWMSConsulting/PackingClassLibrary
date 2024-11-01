@@ -28,15 +28,16 @@ namespace PackingClassLibrary
         [JsonProperty("priority", Required = Required.Always)]
         public int Priority { get; set; }
 
-
         [JsonProperty("article_positions", Required = Required.Always)]
         public List<CustomerOrderArticlePosition> ArticlePositions { get; set; }
 
         public bool isValid()
         {
+            var onlyNumericOrderId = bool.Parse(Environment.GetEnvironmentVariable("NUMERIC_ORDER_ID") ?? "false");
+
             // TODO: change to result
             if (string.IsNullOrEmpty(OrderId)) { return false; }
-            if (!long.TryParse(OrderId, out _)) { return false; }
+            if (onlyNumericOrderId && !long.TryParse(OrderId, out _)) { return false; }
 
             if (!Enum.IsDefined(typeof(OrderType), OrderType)) { return false; }
 
