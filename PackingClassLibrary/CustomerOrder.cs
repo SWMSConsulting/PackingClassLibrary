@@ -31,6 +31,9 @@ namespace PackingClassLibrary
         [JsonProperty("article_positions", Required = Required.Always)]
         public List<CustomerOrderArticlePosition> ArticlePositions { get; set; }
 
+        [JsonProperty("packing_configuration", Required = Required.Default)]
+        public PackingConfiguration PackingConfiguration { get; set; }
+
         public bool isValid()
         {
             var onlyNumericOrderId = bool.Parse(Environment.GetEnvironmentVariable("NUMERIC_ORDER_ID") ?? "false");
@@ -59,6 +62,7 @@ namespace PackingClassLibrary
             return true;
         }
     }
+
 
     public class CustomerOrderArticlePosition
     {
