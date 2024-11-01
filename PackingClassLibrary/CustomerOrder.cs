@@ -28,8 +28,12 @@ namespace PackingClassLibrary
         [JsonProperty("priority", Required = Required.Always)]
         public int Priority { get; set; }
 
+        [JsonProperty("order_date", Required = Required.Default)]
+        public DateTime? OrderDate { get; set; }
+
         [JsonProperty("article_positions", Required = Required.Always)]
         public List<CustomerOrderArticlePosition> ArticlePositions { get; set; }
+
 
         [JsonProperty("packing_configuration", Required = Required.Default)]
         public PackingConfiguration PackingConfiguration { get; set; }
