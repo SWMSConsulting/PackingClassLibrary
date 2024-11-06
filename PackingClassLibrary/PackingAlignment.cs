@@ -3,6 +3,6 @@
 public enum PackingAlignment
 {
     Center = 0,
-    Left = 1,
-    Right = 2
+    Start = 1,
+    End = 2
 }
