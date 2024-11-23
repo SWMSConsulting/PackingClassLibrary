@@ -2,7 +2,7 @@
 
 public enum PackingAlignment
 {
-    Centre = 0,
-    Left = 1,
-    Right = 2
+    Center = 0,
+    Start = 1,
+    End = 2
 }
