@@ -45,8 +45,10 @@ namespace PackingClassLibrary
 
         public bool IsValid()
         {
+            var onlyNumericOrderId = bool.Parse(Environment.GetEnvironmentVariable("NUMERIC_ORDER_ID") ?? "false");
+
             if (string.IsNullOrEmpty(OrderId)) { return false; }
-            if (!long.TryParse(OrderId, out _)) { return false; }
+            if (onlyNumericOrderId && !long.TryParse(OrderId, out _)) { return false; }
 
             if (!Enum.IsDefined(typeof(OrderType), OrderType)) { return false; }
 
