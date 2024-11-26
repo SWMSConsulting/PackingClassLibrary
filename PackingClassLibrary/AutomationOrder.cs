@@ -153,13 +153,14 @@ namespace PackingClassLibrary
             return true;
         }
 
-        public int Height => Packages.Max(p => p.CenterY + p.Height / 2);
+        //system: X = width, Y = height, Z = length
+        public int FillHeight => Packages.Max(p => p.CenterY + p.Height / 2);
         
-        public int Width => 1200;
-        
-        public int Length => 2400;
+        public int FillWidth => Packages.Max(p => p.CenterX + p.Width / 2) - Packages.Min(p => p.CenterX - p.Width / 2);
 
-        public int Weight => 0;
+        public int FillLength => Packages.Max(p => p.CenterZ + p.Length / 2) - Packages.Min(p => p.CenterZ - p.Length / 2);
+
+        public int Weight => (int)Packages.Sum(p => p.Weight);
     }
 
     public class AutomationOrderPackage
@@ -186,7 +187,7 @@ namespace PackingClassLibrary
         [JsonProperty("weight", Required = Required.Always)]
         public double Weight { get; set; }
 
-
+        //system: X = width, Y = height, Z = length
         [JsonProperty("center_x", Required = Required.Always)]
         public int CenterX { get; set; }
 
