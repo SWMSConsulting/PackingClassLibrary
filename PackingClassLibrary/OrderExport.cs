@@ -5,6 +5,7 @@ namespace PackingClassLibrary
     public class OrderExport
     {
         public string? OrderNumber { get; set; }
+        public string? SalesChannel { get; set; }
         public string? CustomerName { get; set; }
         public byte[]? Pdf { get; set; }
         public Guid Oid { get; set; }
