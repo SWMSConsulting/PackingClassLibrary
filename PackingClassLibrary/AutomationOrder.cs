@@ -197,6 +197,9 @@ namespace PackingClassLibrary
         [JsonProperty("center_z", Required = Required.Always)]
         public int CenterZ { get; set; }
 
+        [JsonProperty("rotated_around_z", Required = Required.Default)]
+        public bool RotatedAroundZ { get; set; } = false;
+
         public bool IsValid()
         {
             if(CenterX < 0 || CenterY < 0 || CenterZ < 0)
