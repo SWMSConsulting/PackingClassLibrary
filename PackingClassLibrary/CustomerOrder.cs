@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using FluentResults;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
 namespace PackingClassLibrary
@@ -38,32 +39,39 @@ namespace PackingClassLibrary
         [JsonProperty("packing_configuration", Required = Required.Default)]
         public PackingConfiguration PackingConfiguration { get; set; }
 
-        public bool isValid()
+        public Result isValid()
         {
             var onlyNumericOrderId = bool.Parse(Environment.GetEnvironmentVariable("NUMERIC_ORDER_ID") ?? "false");
 
-            // TODO: change to result
-            if (string.IsNullOrEmpty(OrderId)) { return false; }
-            if (onlyNumericOrderId && !long.TryParse(OrderId, out _)) { return false; }
+            if (string.IsNullOrEmpty(OrderId)) { return Result.Fail("Invalid OrderId"); }
+            if (onlyNumericOrderId && !long.TryParse(OrderId, out _)) { return Result.Fail($"Invalid OrderId: {OrderId}"); }
 
-            if (!Enum.IsDefined(typeof(OrderType), OrderType)) { return false; }
+            if (!Enum.IsDefined(typeof(OrderType), OrderType)) { return Result.Fail("Invalid OrderType"); }
 
-            if (Priority < 0 || Priority > 100) { return false; }
+            if (Priority < 0 || Priority > 100) { return Result.Fail("Invalid Priority"); }
 
-            if (ArticlePositions == null || ArticlePositions.Count == 0) { return false; }
-
-            var automatedArticles = ArticlePositions.Where(a => a.PackingStrategy == ArticlePackingStrategy.Automatic);
-            if(automatedArticles.Count() == 0) { return false; }    
-
-            foreach (CustomerOrderArticlePosition article in ArticlePositions)
-            {
-                if (!article.isValid()) { 
-                    Console.WriteLine("Article is not valid: " + article.ArticleId);
-                    return false; 
-                }
+            if (ArticlePositions == null || ArticlePositions.Count == 0) {
+                return Result.Fail("Order has no ArticlePositions");
             }
 
-            return true;
+            var automatedArticles = ArticlePositions.Where(a => a.PackingStrategy == ArticlePackingStrategy.Automatic);
+            if(automatedArticles.Count() == 0) {
+                return Result.Fail("Order has no automated articles");
+            }
+
+            var articleValidation = Result.Ok();
+            foreach (CustomerOrderArticlePosition article in ArticlePositions)
+            {
+                var res = article.isValid();
+                articleValidation = Result.Merge(articleValidation, res);
+            }
+            if (articleValidation.IsFailed)
+            {
+                var articleErrors = string.Join("\n  ", articleValidation.Errors.Select(e => e.Message));
+                return Result.Fail($"Order has invalid articles:\n  {articleErrors}");
+            }
+
+            return Result.Ok();
         }
     }
 
@@ -102,11 +110,17 @@ namespace PackingClassLibrary
         [JsonProperty("packing_strategy", Required = Required.Always)]
         public ArticlePackingStrategy PackingStrategy { get; set; } = ArticlePackingStrategy.Manual;
 
-        public bool isValid()
+        public Result isValid()
         {
-            if (string.IsNullOrEmpty(ArticleId)) { return false; }
+            if (string.IsNullOrEmpty(ArticleId)) 
+            {
+                return Result.Fail($"Invalid ArticleId: {ArticleId}");
+            }
 
-            if (!Enum.IsDefined(typeof(ArticlePackingStrategy), PackingStrategy)) { return false; }
+            if (!Enum.IsDefined(typeof(ArticlePackingStrategy), PackingStrategy)) 
+            {
+                return Result.Fail($"Invalid PackingStrategy for article {ArticleId}");
+            }
 
             if(MAX_HEIGHT == 0) { MAX_HEIGHT = int.MaxValue; }
             if(MAX_WIDTH == 0) { MAX_WIDTH = int.MaxValue; }
@@ -115,15 +129,15 @@ namespace PackingClassLibrary
             // only check dimensions if packing strategy is automatic
             if (PackingStrategy == ArticlePackingStrategy.Automatic)
             {
-                if (Width <= 0 || Width >= MAX_WIDTH) { return false; }
-                if (Height <= 0 || Height >= MAX_HEIGHT) { return false; }
-                if (Length <= 0 || Length >= MAX_LENGTH) { return false; }
+                if (Width <= 0 || Width >= MAX_WIDTH) { return Result.Fail($"Invalid Width for article {ArticleId}: {Width}"); }
+                if (Height <= 0 || Height >= MAX_HEIGHT) { return Result.Fail($"Invalid Height for article {ArticleId}: {Height}");  }
+                if (Length <= 0 || Length >= MAX_LENGTH) { return Result.Fail($"Invalid Length for article {ArticleId}: {Length}"); }
 
-                if (Weight < 0) { return false; }
-                if (Amount <= 0) { return false; }
+                if (Weight < 0) { return Result.Fail($"Weight is less than 0 for article {ArticleId}"); }
+                if (Amount <= 0) { return Result.Fail($"Amount is less or equal to 0 for article {ArticleId}"); }
             }
 
-            return true;
+            return Result.Ok();
         }
     }
 }
